@@ -41,10 +41,10 @@ class RepaymentController {
     const newBalance = loanRecord.balance - paidAmount;
 
     if (newBalance === 0) {
-      loanRecord.repaid = true;
+      loanRecord.update({ repaid: true });
+    } else {
       // This might be a good usecase for Object.assign()
       loanRecord.update({ balance: newBalance });
-      loanRecord.update({ repaid: loanRecord.repaid });
     }
 
     const data = { loanID, paidAmount };
